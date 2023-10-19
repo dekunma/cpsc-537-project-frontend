@@ -1,0 +1,17 @@
+{
+  "outputFolder": "src/service/apis",
+  "requestCreateLib": "../createRequestConfig",
+  "requestCreateMethod": "createRequestConfig",
+  "apiSpecsPaths": [
+    {
+      "path": "https://mbti-api.dekun.me/v2/api-docs",
+      "name": "mbtiapp"
+    }
+  ],
+  "timeout": 180000,
+  "options": {
+    "withComments": false,
+    "typeWithPrefix": false,
+    "backwardCompatible": false
+  }
+}
