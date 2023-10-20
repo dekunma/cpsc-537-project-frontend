@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import styles from "./SearchBar.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -57,7 +56,7 @@ export default function SearchBar() {
             // className="input input-bordered w-24 md:w-auto"
           />
         </div>
-        <ul className="menu menu-horizontal px-2" ref={dropdownRef}>
+        <ul className="menu menu-horizontal px-2">
           <li>
             <details open={isOpen} onClick={() => setIsOpen(!isOpen)}>
               <summary>MBTI Types</summary>

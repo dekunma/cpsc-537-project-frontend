@@ -92,5 +92,5 @@ export const useRequest = <
     };
   }, [requestConfigCreator]);
 
-  return [request, data, status.loading, status.error] as const;
+  return [request as any, data as any, status.loading, status.error] as const;
 };
