@@ -11,6 +11,8 @@
     "api": "ts-codegen"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.5.1",
     "env-cmd": "^10.1.0",
     "next": "13.5.5",
