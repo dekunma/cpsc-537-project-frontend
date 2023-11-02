@@ -1,78 +1,42 @@
-import styles from "./SearchBar.module.css";
-import { useState } from "react";
-import { useEffect } from "react";
-
 export default function SearchBar() {
-  const mbtiTypes = [
-    "ISTJ",
-    "ISFJ",
-    "INFJ",
-    "INTJ",
-    "ISTP",
-    "ISFP",
-    "INFP",
-    "INTP",
-    "ESTP",
-    "ESFP",
-    "ENFP",
-    "ENTP",
-    "ESTJ",
-    "ESFJ",
-    "ENFJ",
-    "ENTJ",
-  ];
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      setIsOpen(false);
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <div className="navbar bg-base-100" style={{ padding: "2em 10em" }}>
-      <div className="flex-1">
+    <div className="navbar bg-base-100 h-24 mb-8 px-24">
+      {/* start: placeholder */}
+      <div className="navbar-start"></div>
+      <div className="navbar-center">
         <a className="btn btn-ghost normal-case text-xl">PROJECT NAME</a>
       </div>
-      <div className="flex items-center" style={{ justifyContent: "right" }}>
-        <div
-          style={{ width: "50%", alignItems: "flex-end", marginRight: "1.5em" }}
-          className="form-control"
-        >
-          <input
-            type="text"
-            placeholder="Search"
-            className={[
-              styles.searchInput,
-              "input input-bordered w-24 md:w-auto",
-            ].join(" ")}
-            // className="input input-bordered w-24 md:w-auto"
-          />
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          <button className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+          <div
+            tabIndex={0}
+            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+          >
+            <div className="form-control w-full">
+              <input
+                type="text"
+                placeholder="Search"
+                className="input input-bordered w-auto"
+              />
+            </div>
+          </div>
         </div>
-        <ul className="menu menu-horizontal px-2">
-          <li>
-            <details open={isOpen} onClick={() => setIsOpen(!isOpen)}>
-              <summary>MBTI Types</summary>
-              <ul
-                className="p-2 bg-base-100"
-                style={{ overflow: "auto", columns: 3 }}
-              >
-                {mbtiTypes.map((type) => (
-                  <li key={type}>
-                    <a>{type}</a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          </li>
-        </ul>
       </div>
     </div>
   );
