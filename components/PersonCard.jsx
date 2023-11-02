@@ -18,6 +18,7 @@ export default function PersonCard({ title, subTitle, onClick }) {
             <button
               className="btn btn-primary tooltip tooltip-bottom w-24"
               data-tip="Guess MBTI"
+              onClick={() => document.getElementById("guess-modal").showModal()}
             >
               {title ? "Guess" : <Skeleton containerClassName="flex-1" />}
             </button>

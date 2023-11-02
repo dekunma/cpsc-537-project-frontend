@@ -62,6 +62,15 @@ export default function Index() {
           <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
           10 New Random People
         </button>
+        <dialog id="guess-modal" className="modal">
+          <div className="modal-box">
+            <h1>TO BE REPLACED</h1>
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </dialog>
 
         {peopleData.map((person, idx) => (
           <PersonCard
