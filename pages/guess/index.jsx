@@ -1,7 +1,8 @@
+import MBTIGuessComponent from '../../components/MBTIGuessComponent'
 export default function Guess() {
   return (
     <div>
-      <h1>Guess page</h1>
+      <MBTIGuessComponent />
     </div>
   );
 }
