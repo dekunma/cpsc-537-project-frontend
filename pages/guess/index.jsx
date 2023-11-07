@@ -1,4 +1,4 @@
-import MBTIGuessComponent from '../../components/MBTIGuessComponent'
+import MBTIGuessComponent from '../../components/MBTIGuessComponent.jsx'
 export default function Guess() {
   return (
     <div>
