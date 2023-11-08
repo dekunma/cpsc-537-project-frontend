@@ -66,24 +66,28 @@ export default function Index() {
             10 New Random People
           </button>
         </div>
+      </div>
 
-        <dialog id="guess-modal" className="modal">
-          <div className="modal-box">
-            <h1>TO BE REPLACED</h1>
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
-            </form>
-          </div>
-        </dialog>
+      <dialog id="guess-modal" className="modal">
+        <div className="modal-box">
+          <h1>TO BE REPLACED</h1>
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn">Close</button>
+          </form>
+        </div>
+      </dialog>
 
-        {peopleData.map((person, idx) => (
-          <PersonCard
-            key={idx}
-            title={person.name}
-            subTitle={person.subTitle}
-          />
-        ))}
+      <div className="w-full flex justify-center">
+        <div className="w-2/3 grid xl:grid-cols-2 grid-cols-1">
+          {peopleData.map((person, idx) => (
+            <PersonCard
+              key={idx}
+              title={person.name}
+              subTitle={person.subTitle}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
