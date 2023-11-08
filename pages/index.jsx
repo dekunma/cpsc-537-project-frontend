@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar";
+import NavBar from "../components/NavBar";
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:
@@ -14,6 +14,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../components/SearchBar";
 
 export default function Index() {
   const fakePeopleData = [
@@ -56,12 +57,16 @@ export default function Index() {
 
   return (
     <div>
-      <SearchBar />
+      <NavBar />
       <div className="w-full grid grid-cols-1">
-        <button className="btn btn-link w-full" onClick={fetchFakeData}>
-          <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
-          10 New Random People
-        </button>
+        <SearchBar />
+        <div className="w-full my-6 flex justify-center">
+          <button className="btn btn-link" onClick={fetchFakeData}>
+            <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
+            10 New Random People
+          </button>
+        </div>
+
         <dialog id="guess-modal" className="modal">
           <div className="modal-box">
             <h1>TO BE REPLACED</h1>
