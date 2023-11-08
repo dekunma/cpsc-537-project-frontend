@@ -15,6 +15,8 @@ import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../components/SearchBar";
+import MBTIGuessComponent from "../components/MBTIGuessComponent";
+import PersonDetailsComponent from "../components/PersonDetailsComponent";
 
 export default function Index() {
   const fakePeopleData = [
@@ -33,6 +35,14 @@ export default function Index() {
   const emptyPeopleData = new Array(10).fill({ name: "", subTitle: "" });
 
   const [peopleData, setPeopleData] = useState(emptyPeopleData);
+  const [currentName, setCurrentName] = useState("");
+  const [guess, setGuess] = useState({
+    EorI: "",
+    NorS: "",
+    TorF: "",
+    JorP: "",
+  });
+  const [continuedToDetails, setContinuedToDetails] = useState(false);
 
   const [fetchExampleData, exampleData] = useRequest(
     getAllExampleMbtiUsingGet,
@@ -47,7 +57,22 @@ export default function Index() {
     setPeopleData(emptyPeopleData);
     setTimeout(() => {
       setPeopleData(fakePeopleData);
-    }, 3000);
+    }, 1000);
+  };
+
+  const onClickGuess = (name) => {
+    document.getElementById("guess-modal").showModal();
+    setCurrentName(name);
+  };
+
+  const clearGuess = () => {
+    setGuess({
+      EorI: "",
+      NorS: "",
+      TorF: "",
+      JorP: "",
+    });
+    setContinuedToDetails(false);
   };
 
   useEffect(() => {
@@ -70,12 +95,22 @@ export default function Index() {
 
       <dialog id="guess-modal" className="modal">
         <div className="modal-box">
-          <h1>TO BE REPLACED</h1>
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn">Close</button>
-          </form>
+          {continuedToDetails ? (
+            <PersonDetailsComponent name={currentName} mbti={guess} />
+          ) : (
+            <MBTIGuessComponent
+              name={currentName}
+              guess={guess}
+              setGuess={setGuess}
+              onContinue={setContinuedToDetails}
+            />
+          )}
         </div>
+
+        {/* Close outside to close */}
+        <form method="dialog" className="modal-backdrop">
+          <button onClick={clearGuess}>close</button>
+        </form>
       </dialog>
 
       <div className="w-full flex justify-center">
@@ -85,6 +120,7 @@ export default function Index() {
               key={idx}
               title={person.name}
               subTitle={person.subTitle}
+              onClickGuess={() => onClickGuess(person.name)}
             />
           ))}
         </div>
