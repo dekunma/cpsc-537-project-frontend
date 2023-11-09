@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-export default function PersonCard({ title, subTitle, onClickGuess }) {
+export default function PersonCard({ title, description, onClickGuess }) {
   return (
     <div className="flex items-center justify-center mb-10">
       <div className="card w-96 bg-base-100 transition-all duration-300 shadow-xl hover:drop-shadow-2xl">
@@ -12,7 +12,11 @@ export default function PersonCard({ title, subTitle, onClickGuess }) {
           )}
 
           <p className="w-full">
-            {subTitle || <Skeleton containerClassName="flex-1" count={2} />}
+            {description === null ? (
+              <Skeleton containerClassName="flex-1" count={2} />
+            ) : (
+              description
+            )}
           </p>
           <div className="card-actions justify-center">
             <button

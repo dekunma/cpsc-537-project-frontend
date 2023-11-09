@@ -35,6 +35,18 @@ export const getAllExampleMbtiUsingGet = createRequestConfig<undefined, MbtiExam
   () => ({ url: `/v1/examples`, method: "GET" }),
 );
 
+export const getPersonByNameUsingGet = createRequestConfig<
+  {
+    name: string;
+  },
+  PersonResponse
+>("getPersonByNameUsingGet", ({ name }) => ({ url: `/v1/person/${name}`, method: "GET" }));
+
+export const getTenRandomPeopleUsingGet = createRequestConfig<undefined, PersonCard[]>(
+  "getTenRandomPeopleUsingGet",
+  () => ({ url: `/v1/people/random-ten`, method: "GET" }),
+);
+
 export interface MbtiExample {
   comments?: string;
   id?: number;
@@ -120,6 +132,29 @@ export enum ModelAndViewStatus {
   "URI_TOO_LONG" = "URI_TOO_LONG",
   "USE_PROXY" = "USE_PROXY",
   "VARIANT_ALSO_NEGOTIATES" = "VARIANT_ALSO_NEGOTIATES",
+}
+
+export interface PersonCard {
+  description?: string;
+  name?: string;
+}
+
+export interface PersonResponse {
+  code?: string;
+  description100?: string;
+  description?: string;
+  firstFunction?: string;
+  firstLetterVotesPercentage?: string;
+  fourthFunction?: string;
+  fourthLetterVotesPercentage?: string;
+  label?: string;
+  movie?: string;
+  name?: string;
+  secondFunction?: string;
+  secondLetterVotesPercentage?: string;
+  thirdFunction?: string;
+  thirdLetterVotesPercentage?: string;
+  totalVotes?: number;
 }
 
 export interface View {

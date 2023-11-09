@@ -9,7 +9,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 import { useRequest } from "@src/service/useRequest";
-import { getAllExampleMbtiUsingGet } from "@src/service/apis/mbtiapp";
+import {
+  getAllExampleMbtiUsingGet,
+  getTenRandomPeopleUsingGet,
+} from "@src/service/apis/mbtiapp";
 import "react-loading-skeleton/dist/skeleton.css";
 import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,22 +22,9 @@ import MBTIGuessComponent from "../components/MBTIGuessComponent";
 import PersonDetailsComponent from "../components/PersonDetailsComponent";
 
 export default function Index() {
-  const fakePeopleData = [
-    { name: "John", subTitle: "John subtitle" },
-    { name: "Bob", subTitle: "Bob subtitle" },
-    { name: "Alice", subTitle: "Alice subtitle" },
-    { name: "Jane", subTitle: "Jane subtitle" },
-    { name: "Kate", subTitle: "Kate subtitle" },
-    { name: "Jenny", subTitle: "Jenny subtitle" },
-    { name: "Jill", subTitle: "Jill subtitle" },
-    { name: "Jack", subTitle: "Jack subtitle" },
-    { name: "Jill", subTitle: "Jill subtitle" },
-    { name: "Jack", subTitle: "Jack subtitle" },
-  ];
+  const emptyPeopleData = new Array(10).fill({ name: "", subTitle: null });
+  const [isLoading, setIsLoading] = useState(true);
 
-  const emptyPeopleData = new Array(10).fill({ name: "", subTitle: "" });
-
-  const [peopleData, setPeopleData] = useState(emptyPeopleData);
   const [currentName, setCurrentName] = useState("");
   const [guess, setGuess] = useState({
     EorI: "",
@@ -44,21 +34,14 @@ export default function Index() {
   });
   const [continuedToDetails, setContinuedToDetails] = useState(false);
 
-  const [fetchExampleData, exampleData] = useRequest(
-    getAllExampleMbtiUsingGet,
+  const [getTenRandomPeople, tenRandomPeople] = useRequest(
+    getTenRandomPeopleUsingGet,
     {
-      onSuccess: (data) => {
-        console.log(data);
+      onSuccess: () => {
+        setIsLoading(false);
       },
     }
   );
-
-  const fetchFakeData = () => {
-    setPeopleData(emptyPeopleData);
-    setTimeout(() => {
-      setPeopleData(fakePeopleData);
-    }, 1000);
-  };
 
   const onClickGuess = (name) => {
     document.getElementById("guess-modal").showModal();
@@ -75,9 +58,13 @@ export default function Index() {
     setContinuedToDetails(false);
   };
 
+  const onClickGetRandom = () => {
+    setIsLoading(true);
+    getTenRandomPeople();
+  };
+
   useEffect(() => {
-    fetchExampleData();
-    fetchFakeData();
+    getTenRandomPeople();
   }, []);
 
   return (
@@ -86,7 +73,7 @@ export default function Index() {
       <div className="w-full grid grid-cols-1">
         <SearchBar />
         <div className="w-full my-6 flex justify-center">
-          <button className="btn btn-link" onClick={fetchFakeData}>
+          <button className="btn btn-link" onClick={onClickGetRandom}>
             <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
             10 New Random People
           </button>
@@ -115,14 +102,18 @@ export default function Index() {
 
       <div className="w-full flex justify-center">
         <div className="w-2/3 grid xl:grid-cols-2 grid-cols-1">
-          {peopleData.map((person, idx) => (
-            <PersonCard
-              key={idx}
-              title={person.name}
-              subTitle={person.subTitle}
-              onClickGuess={() => onClickGuess(person.name)}
-            />
-          ))}
+          {(isLoading ? emptyPeopleData : tenRandomPeople.data.data).map(
+            (person, idx) => (
+              <PersonCard
+                key={idx}
+                title={person.name}
+                description={
+                  person.description === "" ? "-" : person.description
+                }
+                onClickGuess={() => onClickGuess(person.name)}
+              />
+            )
+          )}
         </div>
       </div>
     </div>
