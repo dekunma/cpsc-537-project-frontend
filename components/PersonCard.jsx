@@ -14,7 +14,7 @@ export default function PersonCard({ title, subTitle, onClickGuess }) {
           <p className="w-full">
             {subTitle || <Skeleton containerClassName="flex-1" count={2} />}
           </p>
-          <div className="card-actions justify-end">
+          <div className="card-actions justify-center">
             <button
               className="btn btn-primary tooltip tooltip-bottom w-24"
               data-tip="Guess MBTI"
