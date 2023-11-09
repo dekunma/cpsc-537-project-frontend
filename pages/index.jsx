@@ -9,10 +9,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 import { useRequest } from "@src/service/useRequest";
-import {
-  getAllExampleMbtiUsingGet,
-  getTenRandomPeopleUsingGet,
-} from "@src/service/apis/mbtiapp";
+import { getTenRandomPeopleUsingGet } from "@src/service/apis/mbtiapp";
 import "react-loading-skeleton/dist/skeleton.css";
 import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
