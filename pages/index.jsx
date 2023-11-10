@@ -46,13 +46,15 @@ export default function Index() {
   };
 
   const clearGuess = () => {
-    setGuess({
-      EorI: "",
-      NorS: "",
-      TorF: "",
-      JorP: "",
-    });
-    setContinuedToDetails(false);
+    setTimeout(() => {
+      setGuess({
+        EorI: "",
+        NorS: "",
+        TorF: "",
+        JorP: "",
+      });
+      setContinuedToDetails(false);
+    }, 200);
   };
 
   const onClickGetRandom = () => {
