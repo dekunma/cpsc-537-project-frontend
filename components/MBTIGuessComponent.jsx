@@ -14,7 +14,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
       <p className="text-xl mb-5">Guess MBTI of</p>
       <p className="text-xl font-bold mb-5">{name}</p>
       <div className="flex justify-between mb-5">
-        <div className="flex items-center ml-2">
+        <div className="flex items-center justify-center ml-2">
           <input
             type="radio"
             id="EorI_E"
@@ -25,7 +25,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="EorI_E"
             title="E (Extraversion): Energized by interaction and external stimuli, extroverts often seek social environments and are outgoing"
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             E
           </label>
@@ -41,7 +41,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="EorI_I"
             title="I (Introversion): Introverts tend to be introspective, preferring solitude or small group interactions and often engage in deep reflection"
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             I
           </label>
@@ -57,7 +57,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="NorS_N"
             title="N (Intuition): Intuitives focus on abstract concepts, possibilities, and the bigger picture, often thinking about the future."
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             N
           </label>
@@ -73,7 +73,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="NorS_S"
             title="S (Sensing): Sensing individuals rely on concrete facts, details, and experiences, often living in the present moment."
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             S
           </label>
@@ -91,7 +91,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="TorF_T"
             title="T (Thinking): Thinkers base decisions on logic, consistency, and objective analysis, often prioritizing the truth over emotions."
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             T
           </label>
@@ -109,7 +109,7 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           <label
             htmlFor="TorF_F"
             title="F (Feeling): Feelers make decisions based on values, emotions, and harmony, often emphasizing human needs and relationships."
-            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-8 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
+            className="peer-checked:bg-gray-100 w-10 h-10 text-center leading-9 cursor-pointer border border-gray-300 rounded px-2.5 mr-2.5"
           >
             F
           </label>
