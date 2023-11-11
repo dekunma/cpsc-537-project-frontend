@@ -17,6 +17,7 @@ import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../components/SearchBar";
 import MBTIGuessComponent from "../components/MBTIGuessComponent";
 import PersonDetailsComponent from "../components/PersonDetailsComponent";
+import ShowScore from "../components/ShowScore";
 
 export default function Index() {
   const emptyPeopleData = new Array(10).fill({ name: "", subTitle: null });
@@ -30,6 +31,22 @@ export default function Index() {
     JorP: "",
   });
   const [continuedToDetails, setContinuedToDetails] = useState(false);
+  const [currentStep, setCurrentStep] = useState("guess");
+
+  const goToScore = () => setCurrentStep("score");
+  const goToDetails = () => setCurrentStep("details");
+  const retryGuess = () => {
+    setTimeout(() => {
+      setGuess({
+        EorI: "",
+        NorS: "",
+        TorF: "",
+        JorP: "",
+      });
+      setContinuedToDetails(false);
+    }, 200);
+    setCurrentStep("guess");
+  }
 
   const [getTenRandomPeople, tenRandomPeople] = useRequest(
     getTenRandomPeopleUsingGet,
@@ -43,7 +60,14 @@ export default function Index() {
   const onClickGuess = (name) => {
     document.getElementById("guess-modal").showModal();
     setCurrentName(name);
+    setCurrentStep("guess")
   };
+
+  const onShowDetails = (name) => {
+    document.getElementById("guess-modal").showModal();
+    setCurrentName(name);
+    setCurrentStep("details")
+  }
 
   const clearGuess = () => {
     setTimeout(() => {
@@ -81,7 +105,27 @@ export default function Index() {
 
       <dialog id="guess-modal" className="modal">
         <div className="modal-box">
-          {continuedToDetails ? (
+          {currentStep === "guess" && (
+            <MBTIGuessComponent
+              name={currentName}
+              guess={guess}
+              setGuess={setGuess}
+              onContinue={goToScore} />
+          )}
+          {currentStep === "score" && (
+            <ShowScore
+              name={currentName}
+              mbti={guess}
+              onShowDetails={goToDetails}
+              onClickGuess={retryGuess} />
+          )}
+          {currentStep === "details" && (
+            <PersonDetailsComponent
+              name={currentName}
+              mbti={guess}
+            />
+          )}
+          {/* {continuedToDetails ? (
             <PersonDetailsComponent name={currentName} mbti={guess} />
           ) : (
             <MBTIGuessComponent
@@ -90,7 +134,7 @@ export default function Index() {
               setGuess={setGuess}
               onContinue={setContinuedToDetails}
             />
-          )}
+          )} */}
         </div>
 
         {/* Close outside to close */}
@@ -110,6 +154,7 @@ export default function Index() {
                   person.description === "" ? "-" : person.description
                 }
                 onClickGuess={() => onClickGuess(person.name)}
+                onShowDetails={() => onShowDetails(person.name)}
               />
             )
           )}

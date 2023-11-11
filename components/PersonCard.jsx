@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-export default function PersonCard({ title, description, onClickGuess }) {
+export default function PersonCard({ title, description, onClickGuess, onShowDetails }) {
   return (
     <div className="flex items-center justify-center mb-10">
       <div className="card w-96 bg-base-100 transition-all duration-300 shadow-xl hover:drop-shadow-2xl">
@@ -29,6 +29,7 @@ export default function PersonCard({ title, description, onClickGuess }) {
             <button
               className="btn btn-ghost tooltip tooltip-bottom w-24"
               data-tip="Show Answer"
+              onClick={onShowDetails}
             >
               {title ? "Answer" : <Skeleton containerClassName="flex-1" />}
             </button>
