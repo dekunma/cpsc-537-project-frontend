@@ -1,6 +1,6 @@
 import { createRequestConfig } from '../createRequestConfig';
 
-  export const errorUsingDelete = createRequestConfig<undefined, { [key: string]: { [key: string]: any } }>(
+export const errorUsingDelete = createRequestConfig<undefined, { [key: string]: { [key: string]: any } }>(
   "errorUsingDelete",
   () => ({ url: `/error`, method: "DELETE" }),
 );
@@ -46,6 +46,15 @@ export const getTenRandomPeopleUsingGet = createRequestConfig<undefined, PersonC
   "getTenRandomPeopleUsingGet",
   () => ({ url: `/v1/people/random-ten`, method: "GET" }),
 );
+
+export const getPeopleByPartialName = createRequestConfig<
+  { query: string },
+  PersonCard[]
+>(
+  "getPeopleByPartialName",
+  (params) => ({ url: `/v1/person/search?query=${params.query}`, method: "GET" }),
+);
+
 
 export interface MbtiExample {
   comments?: string;
