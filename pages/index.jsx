@@ -9,7 +9,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 import { useRequest } from "@src/service/useRequest";
-import { getTenRandomPeopleUsingGet } from "@src/service/apis/mbtiapp";
+import { getTenRandomPeopleUsingGet, getPersonByNameUsingGet } from "@src/service/apis/mbtiapp";
 import "react-loading-skeleton/dist/skeleton.css";
 import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -82,9 +82,55 @@ export default function Index() {
   };
 
   const onClickGetRandom = () => {
+    setSelectedPerson("");
     setIsLoading(true);
     getTenRandomPeople();
   };
+
+  const [selectedPerson, setSelectedPerson] = useState(null);
+
+  const [getPersonByName, personData] = useRequest(getPersonByNameUsingGet);
+
+  const onSelectPerson = (name) => {
+    if (name) {
+      getPersonByName({ name });
+    } else {
+      setSelectedPerson(null);
+
+    }
+  };
+
+  useEffect(() => {
+    if (personData?.data) {
+      setSelectedPerson(personData.data);
+    }
+  }, [personData]);
+
+  const renderPeople = () => {
+    if (selectedPerson) {
+      return [
+        <PersonCard
+          key={selectedPerson.data.name}
+          title={selectedPerson.data.name}
+          description={selectedPerson.data.description || "-"}
+          onClickGuess={() => onClickGuess(selectedPerson.data.name)}
+          onShowDetails={() => onShowDetails(selectedPerson.data.name)}
+        />
+      ];
+    }
+
+    const data = isLoading ? emptyPeopleData : tenRandomPeople.data.data;
+    return data.map((person, idx) => (
+      <PersonCard
+        key={idx}
+        title={person.name}
+        description={person.description === "" ? "-" : person.description}
+        onClickGuess={() => onClickGuess(person.name)}
+        onShowDetails={() => onShowDetails(person.name)}
+      />
+    ));
+  };
+
 
   useEffect(() => {
     getTenRandomPeople();
@@ -94,12 +140,17 @@ export default function Index() {
     <div>
       <NavBar />
       <div className="w-full grid grid-cols-1">
-        <SearchBar />
-        <div className="w-full my-6 flex justify-center">
+        <SearchBar onSelectName={onSelectPerson} />
+        <div className="w-full my-6 flex justify-center pt-8">
           <button className="btn btn-link" onClick={onClickGetRandom}>
             <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
             10 New Random People
           </button>
+        </div>
+        <div className="w-full flex justify-center">
+          <div className="w-2/3 grid xl:grid-cols-2 grid-cols-1">
+            {renderPeople()}
+          </div>
         </div>
       </div>
 
@@ -142,24 +193,6 @@ export default function Index() {
           <button onClick={clearGuess}>close</button>
         </form>
       </dialog>
-
-      <div className="w-full flex justify-center">
-        <div className="w-2/3 grid xl:grid-cols-2 grid-cols-1">
-          {(isLoading ? emptyPeopleData : tenRandomPeople.data.data).map(
-            (person, idx) => (
-              <PersonCard
-                key={idx}
-                title={person.name}
-                description={
-                  person.description === "" ? "-" : person.description
-                }
-                onClickGuess={() => onClickGuess(person.name)}
-                onShowDetails={() => onShowDetails(person.name)}
-              />
-            )
-          )}
-        </div>
-      </div>
     </div>
   );
 }
