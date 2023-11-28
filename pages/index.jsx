@@ -114,7 +114,11 @@ export default function Index() {
         <PersonCard
           key={selectedPerson.data.name}
           title={selectedPerson.data.name}
-          description={selectedPerson.data.description || "-"}
+          description={
+            selectedPerson.data.description100 ||
+            selectedPerson.data.movie ||
+            "-"
+          }
           onClickGuess={() => onClickGuess(selectedPerson.data.name)}
           onShowDetails={() => onShowDetails(selectedPerson.data.name)}
         />,
