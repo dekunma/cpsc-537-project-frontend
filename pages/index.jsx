@@ -21,6 +21,7 @@ import SearchBar from "../components/SearchBar";
 import MBTIGuessComponent from "../components/MBTIGuessComponent";
 import PersonDetailsComponent from "../components/PersonDetailsComponent";
 import ShowScore from "../components/ShowScore";
+import Head from "next/head";
 
 export default function Index() {
   const emptyPeopleData = new Array(10).fill({ name: "", subTitle: null });
@@ -143,6 +144,9 @@ export default function Index() {
 
   return (
     <div>
+      <Head>
+        <title>StarMind</title>
+      </Head>
       <NavBar />
       <div className="w-full grid grid-cols-1">
         <SearchBar onSelectName={onSelectPerson} />
