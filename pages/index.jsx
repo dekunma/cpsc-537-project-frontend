@@ -9,7 +9,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 import { useRequest } from "@src/service/useRequest";
-import { getTenRandomPeopleUsingGet, getPersonByNameUsingGet } from "@src/service/apis/mbtiapp";
+import {
+  getTenRandomPeopleUsingGet,
+  getPersonByNameUsingGet,
+} from "@src/service/apis/mbtiapp";
 import "react-loading-skeleton/dist/skeleton.css";
 import PersonCard from "../components/PersonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,7 +49,7 @@ export default function Index() {
       setContinuedToDetails(false);
     }, 200);
     setCurrentStep("guess");
-  }
+  };
 
   const [getTenRandomPeople, tenRandomPeople] = useRequest(
     getTenRandomPeopleUsingGet,
@@ -60,14 +63,14 @@ export default function Index() {
   const onClickGuess = (name) => {
     document.getElementById("guess-modal").showModal();
     setCurrentName(name);
-    setCurrentStep("guess")
+    setCurrentStep("guess");
   };
 
   const onShowDetails = (name) => {
     document.getElementById("guess-modal").showModal();
     setCurrentName(name);
-    setCurrentStep("details")
-  }
+    setCurrentStep("details");
+  };
 
   const clearGuess = () => {
     setTimeout(() => {
@@ -96,7 +99,6 @@ export default function Index() {
       getPersonByName({ name });
     } else {
       setSelectedPerson(null);
-
     }
   };
 
@@ -115,7 +117,7 @@ export default function Index() {
           description={selectedPerson.data.description || "-"}
           onClickGuess={() => onClickGuess(selectedPerson.data.name)}
           onShowDetails={() => onShowDetails(selectedPerson.data.name)}
-        />
+        />,
       ];
     }
 
@@ -130,7 +132,6 @@ export default function Index() {
       />
     ));
   };
-
 
   useEffect(() => {
     getTenRandomPeople();
@@ -161,20 +162,19 @@ export default function Index() {
               name={currentName}
               guess={guess}
               setGuess={setGuess}
-              onContinue={goToScore} />
+              onContinue={goToScore}
+            />
           )}
           {currentStep === "score" && (
             <ShowScore
               name={currentName}
               mbti={guess}
               onShowDetails={goToDetails}
-              onClickGuess={retryGuess} />
+              onClickGuess={retryGuess}
+            />
           )}
           {currentStep === "details" && (
-            <PersonDetailsComponent
-              name={currentName}
-              mbti={guess}
-            />
+            <PersonDetailsComponent name={currentName} mbti={guess} />
           )}
           {/* {continuedToDetails ? (
             <PersonDetailsComponent name={currentName} mbti={guess} />

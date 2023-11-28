@@ -97,7 +97,6 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
           </label>
         </div>
         <div className="flex items-center ml-0.5">
-
           <input
             type="radio"
             id="TorF_F"
@@ -154,7 +153,10 @@ function MBTIGuessComponent({ name, guess, setGuess, onContinue }) {
         {guess.TorF}
         {guess.JorP}
       </div>
-      <button className="btn btn-primary tooltip tooltip-bottom w-30" onClick={onContinue}>
+      <button
+        className="btn btn-primary tooltip tooltip-bottom w-30"
+        onClick={onContinue}
+      >
         Continue
       </button>
     </div>
