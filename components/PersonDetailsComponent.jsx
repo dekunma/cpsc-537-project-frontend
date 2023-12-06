@@ -28,7 +28,7 @@ export default function PersonDetailsComponent({ name }) {
       <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
         <div className="flex items-center ">
           <div className="image-container mr-5">
-            <Image src={imagePath} width={450} height={400} />
+            <Image src={imagePath} width={300} height={400} />
           </div>
           <div>
             <h1 className="text-2xl font-bold mt-1 mb-1">{name}</h1>
